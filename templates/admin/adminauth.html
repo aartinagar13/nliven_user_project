@@ -1,0 +1,24 @@
+{% extends 'admin/layout/comman-layout.html' %}
+<!-- title block-->
+{% block title %}Home2 {% endblock title %}
+{% load static%}
+<!-- content block-->
+{%block content %} {% load static %}
+
+<!-- partial -->
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-md-12">
+        <br><br>
+        <h1>You have no access to add/ edit/ delete the users as your data being deleted...</h1> <br><br>
+        <div class="my-3 d-flex justify-content-end align-items-center">
+            <a href="/" class="auth-link text-black">Login again??</a>
+          </div>
+          <div class="my-3 d-flex justify-content-end align-items-center">
+            <a href="/home" class="auth-link text-black">Back to home page</a>
+          </div>
+      </div>
+    </div>
+  </div>
+  <!-- content-wrapper ends -->
+{% endblock content %}

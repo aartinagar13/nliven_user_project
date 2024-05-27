@@ -1,0 +1,148 @@
+{% extends 'admin/layout/comman-layout.html' %}
+<!-- title block-->
+{% block title %}Home2 {% endblock title %}
+{% load static%}
+
+<!-- content block-->
+{%block content %} {% load static %}
+
+<!-- partial -->
+        <div class="content-wrapper">
+          <div class="row">
+		     <div class="col-md-12">
+				<h3> <a href="{% url 'users' %}">Users</a>/<a href="{% url 'add' %}">EditUser</a></h3> 
+			 </div>
+			 
+			<div class="col-md-12 grid-margin stretch-card"> 
+              <div class="card"> 
+				<form class="pt-3" id="registration_form" enctype="multipart/form-data"  action="/home/users_list/store" method="POST">
+					{% csrf_token %}
+                <div class="card-body border-bottom">
+					<input type="hidden" class="form-control" id="user_id"  name="user_id" value="{{ user_data.id }}" placeholder="">
+				
+					 <div class="row">
+					      <div class="col-md-4 col-lg-3">
+						       <div class="form-group">
+								  <label for="firstname">First Name</label>
+								  <input type="text" class="form-control" id="first_name" name="first_name" value="{{ user_data.first_name }}" placeholder="" >
+								  <span id="u_firstn" style= "color:red" ></span>
+								</div> 
+						  </div>
+                          
+                          <div class="col-md-4 col-lg-3">
+						       <div class="form-group">
+								  <label for="lastname">Last Name</label>
+								  <input type="text" class="form-control" id="last_name"  name="last_name" value="{{ user_data.last_name }}" placeholder="">
+								  <span id="u_lastn"  style= "color:red"></span> 
+								</div>
+						  </div>
+
+                          <div class="col-md-4 col-lg-3">
+						       <div class="form-group">
+								  <label for="email">Email Address</label>
+								  <input type="text" class="form-control" id="email"  name="email" value="{{ user_data.email }}" placeholder="">
+								  <span id="u_mail" style= "color:red"></span>
+								</div>
+						  </div>
+						  
+                          
+						</div>
+						<div class="row">
+                            <div class="col-4">
+						       <div class="form-group">
+								  <label for="userpassword">Password (Text)</label>
+								  <input type="password" class="form-control" id="password" name="password" placeholder="">
+								  <span id="u_pwd" style= "color:red" ></span>
+							   </div>
+						    </div>
+						    <div class="col-4">
+							 <div class="form-group">
+							   <label for="userpassword">Confirm Password (Text)</label>
+							   <input type="password" class="form-control" id="confirm_password" name="confirm_password"placeholder="">
+							   <span id="u_con_pwd" style= "color:red" ></span>	
+							 </div> 
+					        </div>
+							
+
+							<div class="row">
+								<div class="col-md-4 col-lg-3">
+										<div class="form-group">
+											<label for="userpassword">Status</label>
+											<div class="d-flex">
+												<div class="form-check form-check-primary mr-4">
+												 <label class="form-check-label">
+												  <input type="radio" class="form-check-input" name="status" id="active" checked="">
+												   Active
+												  <i class="input-helper"></i></label>
+												</div>
+												<div class="form-check form-check-primary">
+												 <label class="form-check-label">
+												  <input type="radio" class="form-check-input" name="status" id="inactive">
+												  Inactive
+												  <i class="input-helper"></i></label>
+											   </div>
+											</div>  
+										</div> 
+								</div>	
+							</div><!---/row-->
+
+						</div>	
+						<div class="col-md-4 col-lg-3">
+								
+							<div class="form-group">
+							  <label>Profile Image</label>
+							  <input  name="fileInput" type="file" id="fileInput" onchange="displayChosenFile()">
+							 
+							  <p id="chosenFile"></p>
+							  <img  id="previewImage" style="max-width: 100%; max-height: 300px;">
+							</div>
+						  </div>
+					
+				  <div class="form-group text-right mb-0">
+					<button
+					class="btn btn-primary" onclick="handleAddDataButtonClick()"
+					type="submit"> 
+				     Save
+				    </button>
+					 <a class="btn btn-danger" href="{% url 'users' %}">Cancel</a>
+			      </div> 
+                </div>
+				</form>
+              </div>
+            </div> 
+		 </div> 
+		  </div>
+
+		  <script>
+			function displayChosenFile() {
+				// Get the file input element
+				var fileInput = document.getElementById('fileInput');
+				// Get the selected file
+				var chosenFile = fileInput.files[0];
+				// Display the file name
+				var chosenFileDisplay = document.getElementById('chosenFile');
+				// Display the image
+				var previewImage = document.getElementById('previewImage');
+	
+				// Check if the chosen file is an image
+				if (chosenFile && chosenFile.type.startsWith('media/')) {
+					var reader = new FileReader();
+	
+					// Set up the reader onload event
+					reader.onload = function (e) {
+						// Set the source of the image element to the read data URL
+						previewImage.src = e.target.result;
+					};
+	
+					// Read the file as a data URL
+					reader.readAsDataURL(chosenFile);
+				} else {
+					// If the chosen file is not an image, clear the image element
+					previewImage.src = '';
+				}
+			}
+		</script>
+		<script src="{% static 'js/register_spanmsg.js' %}"></script>
+        <!-- content-wrapper ends -->
+        {% endblock content %}
+

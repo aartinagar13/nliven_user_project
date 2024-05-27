@@ -1,0 +1,73 @@
+pip install --upgrade setuptools
+
+====Then install python mysql=====
+pip install pymysql
+
+===Then edit the init.py file in project root directory (where settings.py file located)===
+import pymysql
+pymysql.install_as_MySQLdb()
+
+===Edit the settings.py file on root directory:====
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'database name',
+        'USER': 'username',
+        'PASSWORD': 'password',
+        'HOST': '127.0.0.1',  // If localhost
+        'PORT': '3306',  // your database running port
+    }
+}
+
+
+====Login to mysql on Terminal and create a DB====
+
+mysql -u root -p
+enter password of.....
+mysql> CREATE DATABASE dbname;
+
+mysql> USE dbname;
+mysql> show databases;
+DESCRIBE adminapp_profile;
+
+===VIRTUAL eNV===
+pip install virtualenv
+virtualenv --version
+virtualenv virenvgpt
+. virenvgpt/bin/activate
+pip install mysql.connector
+
+
+======add field at auth_user table===
+
+AUTH_USER_MODEL = 'your_app_name.modelname'
+AUTH_USER_MODEL = 'your_app_name.Profile'
+
+#model.py
+class Profile(AbstractUser):
+    username = models.OneToOneField(User, on_delete=models.CASCADE)
+    role = models.ForeignKey(Role, on_delete=models.SET_NULL, null=True)
+    image = models.ImageField(upload_to='media/', null=True, blank=True)
+    gender = models.ForeignKey(Gender, on_delete=models.SET_NULL, null=True)
+
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='profile_groups',  # Set a custom related_name
+        blank=True,
+        help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.',
+        verbose_name='groups',
+    )
+
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='profile_user_permissions',  # Set a custom related_name
+        blank=True,
+        help_text='Specific permissions for this user.',
+        verbose_name='user permissions',
+    )
+
+    def __str__(self):
+        return self.username    
+
+  

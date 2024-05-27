@@ -1,0 +1,380 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>{% block title %}{% endblock %}User</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="{% static 'vendors/feather/feather.css' %}" />
+    
+    <!-- Include Toastr.css (optional, for styling) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    
+
+    <link
+      rel="stylesheet"
+      href="{% static 'vendors/ti-icons/css/themify-icons.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'vendors/css/vendor.bundle.base.css' %}"
+    />
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link
+      rel="stylesheet"
+      href="{% static 'vendors/datatables.net-bs4/dataTables.bootstrap4.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      href="{% static 'vendors/ti-icons/css/themify-icons.css' %}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'js/select.dataTables.min.css' %}"
+    />
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link
+      rel="stylesheet"
+      href="{% static 'css/vertical-layout-light/style.css' %}"
+    />
+    
+
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/login_custom.css' %}" />
+    <!-- endinject -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
+    <style>
+      /* Add your custom styles for different message types here */
+      .toast-success {
+          background-color: #28a745; /* Bootstrap success color */
+      }
+
+      .toast-warning {
+          background-color: #ffc107; /* Bootstrap warning color */
+      }
+
+      .toast-error {
+          background-color: #dc3545; /* Bootstrap error color */
+      }
+  </style>
+
+  </head>
+  <body>
+    <div class="container-scroller">
+      <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+        <div
+          class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center"
+        >
+          <a class="navbar-brand brand-logo mr-5" href="home"
+            ><img
+              src="{% static 'images/logo.png' %}"
+              class="mx-3"
+              alt="logo"
+          /></a>
+          <a class="navbar-brand brand-logo-mini" href="home"
+            ><img
+              src="{% static 'images/logo-min.png' %}"
+              alt="logo"
+          /></a>
+        </div>
+        <div
+          class="navbar-menu-wrapper d-flex align-items-center justify-content-end"
+        >
+          <button
+            class="navbar-toggler navbar-toggler align-self-center"
+            type="button"
+            data-toggle="minimize"
+          >
+            <span class="icon-menu"></span>
+          </button>
+          <ul class="navbar-nav mr-lg-2">
+            <li class="nav-item nav-search d-none d-lg-block">
+              <div class="input-group">
+                <div
+                  class="input-group-prepend hover-cursor"
+                  id="navbar-search-icon"
+                >
+                  <span class="input-group-text" id="search">
+                    <i class="icon-search"></i>
+                  </span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="navbar-search-input"
+                  placeholder="Search now"
+                  aria-label="search"
+                  aria-describedby="search"
+                />
+              </div>
+            </li>
+          </ul>
+          <ul style="mmargin-left:80px;" class="navbar-nav navbar-nav-right">
+            <li class="nav-item nav-profile dropdown">
+              <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-toggle="dropdown"
+              id="profileDropdown">
+
+              <div class="user_info fw_bold mr-2">
+                <span class="d-block text-primary"><strong> {% firstof user.get_short_name user.get_username %}</strong></span>
+               </div>
+               <div
+                     class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                      aria-labelledby="profileDropdown"
+                  >
+                <a class="dropdown-item">
+                     <i class="ti-settings text-primary"></i>
+                   Settings
+                 </a>
+                 <a class="dropdown-item" href="{% url 'logout' %}">
+                     <i class="ti-power-off text-primary"></i>
+                     Logout
+                   </a>
+                 </div>
+              
+                {% comment %} {% for User in users %}
+                {% if user == request.user %}
+                   <img src="/media/{{ User.image}}" alt="Profile Picture">
+                   {% else %}
+                  <p>No profile picture available.</p>
+                  {% endif %}
+                {% endfor %} {% endcomment %}
+              </a>
+              <img src="/media/{{user.image}}"  style="margin:0;height:60px; width:30%;" >
+             
+            </li>
+          </ul>
+          <button
+            class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
+            type="button"
+            data-toggle="offcanvas"
+          >
+            <span class="icon-menu"></span>
+          </button>
+        </div>
+      </nav>
+      <!-- partial -->
+      <div class="container-fluid page-body-wrapper">
+        <!-- partial -->
+        <!-- partial:partials/_sidebar.html -->
+        <nav class="sidebar sidebar-offcanvas" id="sidebar">
+          <ul class="nav">
+            <li  id='home_li' class="nav-item ">
+              <a 
+              class="nav-link" href="{% url 'home' %}"
+              aria-expanded="false"
+              aria-controls="course" >
+                <i class="ti-home menu-icon"></i>
+                <span class="menu-title">Home</span>
+              </a>
+            </li>
+          
+            <li  id='user_li' class="nav-item">
+              <a
+                class="nav-link"
+                href="{% url 'user_listnoaj' %}"
+               aria-expanded="false"
+                aria-controls="course" 
+              >
+                <i class="ti-user menu-icon"></i>
+                <span class="menu-title">User</span>
+              </a>
+            </li>
+            <li id='ajaxuser_li' class="nav-item ">
+              <a
+                class="nav-link"
+                href="{% url 'users' %}"
+               aria-expanded="false"
+                aria-controls="course" 
+              >
+                <i class="ti-user menu-icon"></i>
+                <span class="menu-title">Ajax_User</span>
+              </a>
+            </li>
+            <li id='USER_li' class="nav-item ">
+              <a
+                class="nav-link"
+                href="{% url 'users_list' %}"
+               aria-expanded="false"
+                aria-controls="course" 
+              >
+                <i class="ti-user menu-icon"></i>
+                <span class="menu-title">USER</span>
+              </a>
+            </li>
+           
+          </ul>
+        </nav>
+        <!-- partial -->
+      <div class="main-panel">
+        {% block content %}{% endblock content  %}
+         <!-- content-wrapper ends -->
+        
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+
+   <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2023. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">User</span>
+          </div>
+        </footer>
+        <!-- partial -->
+
+
+  </div>
+  
+  <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="{% static 'vendors/js/vendor.bundle.base.js' %}"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+
+    <script src="{% static 'vendors/datatables.net/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'vendors/datatables.net-bs4/dataTables.bootstrap4.js' %}"></script>
+    <script src="{% static 'js/dataTables.select.min.js' %}"></script>
+
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="{% static 'js/off-canvas.js' %}"></script>
+    <script src="{% static 'js/hoverable-collapse.js' %}"></script>
+    <script src="{% static 'js/template.js' %}"></script>
+
+    <script src="{% static 'js/toastr_add.js' %}"></script>
+
+    <!-- Include Toastr.js -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <!-- ajax-datatable-->
+    <script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script>
+
+      //----------this code for menu active--------------//
+        $(document).ready(function () {
+          // Check if the current URL matches the Home URL <a class="btn btn-danger" href="#">Delete</a>   
+          var currentUrl = window.location.pathname;
+          var homeUrl = "{% url 'home' %}";
+          var user_listUrl = "{% url 'users_list' %}";
+          var userUrl = "{% url 'users' %}";
+          var add_userUrl = "{% url 'add' %}"
+          {% comment %} var edit_userUrl = "{% url 'edit_user' id %}" {% endcomment %}
+      
+          if (currentUrl === homeUrl) {
+            // Add 'active' class to the 'Home' menu if the current URL is the home URL
+            $(".nav-item").removeClass("active");
+            $("#home_li").addClass("active");
+          }
+      
+          if(currentUrl === user_listUrl) {
+            $(".nav-item").removeClass("active");
+            $("#USER_li").addClass("active");
+          }
+          if(currentUrl === userUrl) {
+            $(".nav-item").removeClass("active");
+            $("#ajaxuser_li").addClass("active");
+          }
+
+          //add_user.html page
+          if(currentUrl === add_userUrl) {
+            $(".nav-item").removeClass("active");
+            $("#USER_li").addClass("active");
+          }
+          //add_user.html page
+          {% comment %} if(currentUrl === edit_userUrl) {
+            $(".nav-item").removeClass("active");
+            $("#USER_li").addClass("active");
+          } {% endcomment %}
+      
+          $(".nav-link").click(function () {
+            // Remove the 'active' class from all 'li' elements
+            $(".nav-item").removeClass("active");
+      
+            // Add the 'active' class to the clicked 'li' element
+            $(this).closest("li").addClass("active");
+          });
+        });
+        //------------menu active code end---------------//
+    
+   
+      function showLoaderOnClick(url) {
+        showLoader();
+        window.location=url;
+        }
+        function showLoader(){
+        $('body').append('<div style="" id="loadingDiv"><div class="loader">Loading...</div></div>');
+        }
+      
+  
+       function toasterOptions() {
+              
+                  toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-top-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                  };
+              }
+          
+              // Function to show Toastr messages
+              function showToastrMessages(messageType, messageText) {
+                  switch (messageType) {
+                      case 'success':
+                          toastr.success(messageText);
+                          break;
+                      case 'warning':
+                          toastr.warning(messageText);
+                          break;
+                      case 'error':
+                          toastr.error(messageText);
+                          break;
+                      default:
+                          // Default case, do nothing
+                  }
+              }
+              function handleAddDataButtonClick() {
+                // Add your logic to add data here
+    
+                // After adding data, show a Toastr message
+                showToastrMessage('success', 'Data added successfully!');
+            }
+    
+               //function is called
+              toasterOptions();
+          
+              // Example: Show success message when the page is loaded
+              {% if messages %}
+                  $(document).ready(function() {
+                      {% for message in messages %}
+                          showToastrMessages('{{ message.tags }}', '{{ message }}');
+                      {% endfor %}
+                  });
+              {% endif %}
+              
+                </script>
+    <!-- endinject -->
+  
+    {% block js %}  {% endblock %}
+</body>
+
+</html>

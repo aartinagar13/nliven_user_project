@@ -1,0 +1,336 @@
+{% extends 'admin/layout/comman-layout.html' %}
+<!-- title block-->
+{% block title %}Home2 {% endblock title %}
+{% load static%}
+<script src="{% static 'js/register_spanmsg.js' %}"></script>
+<!-- content block-->
+{%block content %}
+
+<!-- partial -->
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-md-12">
+       <h2> <a href="{% url 'users' %}">Users</a></h2>
+      </div>
+      <form  style="margin-left:1050px" class="d-flex" role="search" action="{% url  'search_userlist' %}" >
+        {% csrf_token %}
+        <input
+           class="form-control me-2"
+           type="search"
+           placeholder="Search"
+           name="search"
+         
+           required aria-label="Search"
+        >
+        <button class="btn btn-outline-success"  onclick="showLoaderOnClick('{% url  'search_userlist' %}')"  id="search" type="submit">Search</button>
+       </form>
+
+      <div class="col-md-12 grid-margin stretch-card"><br>
+        <div class="card">
+         
+      
+          {% comment %} {% for message in messages %}
+              <div class="alert alert-danger">
+                  <a class="close" href="#" data-dismiss="alert">×</a>
+                    {{ message }}
+              </div>search
+              {% endfor %}
+               {% endcomment %}
+          <div class="card-body">
+            <div class="responsive_table mb-2">
+               
+              <table
+                id="example2"
+                class="table table-striped table-bordered"
+                style="width: 100%"
+              >
+                <thead>
+                    {%if users%}
+                  <tr>
+                    <th style="width: 40px"></th>
+                    <th>Profile Image </th>
+                    <th>Username</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Roles</th>
+                    <th>Gender</th>
+                    <th style="width: 80px">Action</th>
+                  </tr>
+                </thead>
+                <tbody id ='result'>
+
+                   {% comment %} {% for userss in userss %}
+                  <tr>
+                      <td>{{userss.username}}</td> 
+                  </tr> 
+                {% endfor %}  {% endcomment %}
+                  {% comment %} {% for userss in userss %}
+                  <a> {{userss.username}} </a> 
+                 {% endfor %} {% endcomment %}
+                 <form method="post" action="{% url 'delete_selected_users' %}">
+                  {% csrf_token %}
+              {% comment %} //for multiple delete // {% endcomment %}
+    
+                  {% for User in users %}
+                  <tr>
+                    <td>
+                      <div class="form-check">
+                        {% if not User.is_superuser %} 
+                          <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" name="user_id" value="{{ User.id }}">
+                              <i class="input-helper"></i>
+                          </label>
+                          {% else %}
+                         <p style="color:red;">cannot be deleted</p>
+                          {% endif %}
+                      </div>
+                    </td>
+      
+                    <td>
+                      {% comment %} if image is uploaded then show here {% endcomment %}
+                      {% if User.image %}
+                      <img src="/media/{{User.image}}"  style="margin:0;height:60px; width:60%;" >
+                      {% else %}
+                      <img src="{% static 'images/demo_profile.png' %}" alt="Default Profile Image" />
+                      {% endif %}
+                    </td>
+                    <td>{{ User.username }}</td>
+                    <td>{{ User.first_name }}</td>
+                    <td>{{ User.last_name }}</td>
+                    <td>{{ User.email }}</td>
+                    <td>{{ User.role }}</td> 
+                    <td>{{ User.gender }}</td>
+                    <td>
+                      <div class="d-flex justify-content-between">
+                        {% comment %} if user is superuesr then dont delete otherwise delete single user only {% endcomment %}
+                        {% if User.is_superuser %}
+                        <p style="color:red;">can'not edit/delete</p>
+                        {% else %}
+                        <a href="{% url 'edit_user' User.id %}" class="action-btn edit-icon"
+                          ><span  style ="color:black;" class="ti-pencil"></span
+                        ></a> 
+
+                        <button id="{{User.id}}" 
+                        data-toggle="modal" 
+                        data-target="#exampledelete" 
+                        onclick="confirmDelete('{{User.id}}')"
+                        class="action-btn delete-icon confirm-delete">
+                       <a href="#">
+                        <span class="ti-trash"></span>
+                       </a>
+                       </button>
+                       {% endif %}
+
+                
+                <!-- Modal for Confirmation -->
+                <div class="modal fade" id="exampledelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div  class="modal-header">
+                              <h5 class="modal-title"  style ="color:white;" id="exampleModalLabel">Confirm Deletion</h5>
+                              <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
+                                  <span  aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body">
+                              Are you sure to delete this item?
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                              <a id="deleteLink" href="{% url 'delete_user' User.id %}" class="btn btn-danger">Delete</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+                   
+                      </div>
+                    </td>
+                  </tr>
+                  {% endfor %}   
+                  {% else %}
+                  <p>No users found.</p>  <a href="/home/users">Back to userlist</a>
+
+                {% endif %} 
+
+                </tbody>
+              </table>
+              <a  class="btn btn-dark mr-2" href="{% url 'add' %}">Add User</a>
+              <a class="btn btn-primary mr-2" href="#">Email</a>                                
+              <button id="{{User.id}}" 
+              data-toggle="modal" 
+              data-target="#exampledeleteusers" 
+              onclick="confirmDeleteuser('{{User.id}}')"
+              class="btn btn-danger confirm-delete">
+             <a href="#">
+             
+             </a>Delete Selected Users
+             </button>
+            
+             <div class="modal fade" id="exampledeleteusers" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div  class="modal-header">
+                          <h5 class="modal-title"  style ="color:white;" id="exampleModalLabel">Confirm Deletion</h5>
+                          <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
+                              <span  aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          Are you sure to delete this item?
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                          <a id="deleteLink" href="{% url 'delete_selected_users' %}" class="btn btn-danger">Delete</a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+            </form>
+            </div>
+            <div class="row">
+            <div class="form-group col-md-6">                                                  
+            </div>
+             <div class="pagination justify-content-end col-md-6 ">
+                <div id="data-container">
+                  {% comment %} {% for User in users %}
+                      <!-- Display your data here -->
+                      <p>{{User.username }}</p>
+                  {% endfor %} {% endcomment %}
+                
+                  <div class="pagination">
+                      <span class="step-links">
+                          {% if users.has_previous %}
+                              <a href="?page=1">&laquo; first</a>
+                              <a href="?page={{ users.previous_page_number }}">previous</a>
+                          {% endif %}
+                
+                          <span class="current">
+                              Page {{users.number }} of {{ users.paginator.num_pages }}.
+                          </span>
+                
+                          {% if users.has_next %}
+                              <a href="?page={{ users.next_page_number }}">next</a>
+                              <a href="?page={{ users.paginator.num_pages }}">last &raquo;</a>
+                          {% endif %}
+                      </span>
+                  </div>
+                </div>
+              </div> 
+             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- Add this in your_template.html -->
+
+<script>
+  //pagination 
+    console.log('hii11')
+     $(document).ready(function() {
+      console.log('hii12')
+      function loadPage(page) {
+        console.log('hii13')
+          $.ajax({
+             console.log('hii14')
+              url: '/users/',  // Replace with the actual URL of your API endpoint
+              data: {'page': page},
+              success: function(user) {
+                  $('#data-container').html(User);
+              },
+              error: function(xhr, status, error) {
+                  console.error(error);
+              }
+          });
+      }
+      console.log('hii15')
+      $(document).on('click', '.pagination a', function(e) {
+          e.preventDefault();
+          var page = $(this).attr('href').split('page=')[1];
+          loadPage(page);
+      });
+      console.log('hii16')
+      loadPage(1);  // Initial load
+    });
+  
+
+    //searching functionality
+    $(document).ready(function () {
+        $('#search').DataTable();
+    });
+   
+  
+  /* user delete confirm box for one user */
+  function confirmDelete(userId) {
+    // Set the href attribute of the "Delete" link in the modal to the actual delete URL
+    document.getElementById('deleteLink').href = '{% url "delete_selected_users"  %}'
+    // Show the modal
+    $('#exampledeleteusers').modal('show');
+   }
+
+    
+    {% comment %} /* user delete confirm box */
+  function confirmDelete(userId) {
+    // Set the href attribute of the "Delete" link in the modal to the actual delete URL
+    document.getElementById('deleteLink').href = '{% url "delete_user" 0 %}'.replace('0', userId);
+    // Show the modal
+    $('#exampledelete').modal('show');
+   }
+ {% endcomment %}
+
+
+     //loader in search barstyle ="color:black;" 
+    $(document).ready(function() {
+    $('#searchButton').on('click', function() {
+      var searchTerm = $('#searchInput').val();
+
+      if (searchTerm.trim() !== '') {
+        // Show loader while processing the search
+        $('#loader').show();
+
+        // Simulate a search process (replace this with your actual search logic)
+        setTimeout(function() {
+          // Hide loader after search is complete (replace this with your actual search callback)
+          $('#loader').hide();
+          alert('Search completed for: ' + searchTerm);
+        }, 2000);
+      }
+    });
+  });
+
+
+  function showLoaderOnClick(url) {
+    showLoader();
+    window.location=url;
+    }
+    function showLoader(){
+    $('body').append('<div style="" id="loadingDiv"><div class="loader">Loading...</div></div>');
+    }
+ 
+{% comment %} 
+<script>
+  $(document).ready(function() {
+  toastr.options = {
+    "closeButton": false,
+    "debug": false,
+    "newestOnTop": false,
+    "progressBar": true,
+    "positionClass": "toast-top-center",
+    "preventDuplicates": true,
+    "onclick": null,
+    "showDuration": "100",
+    "hideDuration": "1000",
+    "timeOut": "5000",
+    "extendedTimeOut": "1000",
+    "showEasing": "swing",
+    "hideEasing": "linear",
+    "showMethod": "show",
+    "hideMethod": "hide"
+  }
+});
+
+</script> {% endcomment %}
+
+  <!-- content-wrapper ends -->
+{% endblock content %}

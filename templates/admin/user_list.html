@@ -1,0 +1,316 @@
+{% extends 'admin/layout/comman-layout.html' %}
+<!-- title block-->
+{% block title %}Home2 {% endblock title %}
+{% load static%}
+<!-- content block-->
+{%block content %}
+
+<!-- partial -->
+  <div class="content-wrapper">
+    <div class="row">
+      <div class="col-md-12">
+       <h2> <a href="{% url 'users' %}">Users</a></h2>
+      </div>
+      <div class="col-md-12 grid-margin stretch-card"><br>
+        <div class="card">
+          {% comment %} {% for message in messages %}
+              <div class="alert alert-danger">
+                  <a class="close" href="#" data-dismiss="alert">×</a>
+                    {{ message }}
+              </div>search
+              {% endfor %}
+               {% endcomment %}
+          <div class="card-body">
+            <div class="responsive_table mb-2">
+               
+              <table
+                id="user-table"
+                class="table table-striped table-bordered"
+                style="width: 100%" >
+                <thead>  
+                  <tr>
+                    <th id ='checkbox_user' data-orderable="false" style="width:40px"></th>
+                    <th style="width: 40px">S.no</th>
+                    <th data-orderable="false">Profile Image </th>
+                    <th>Username</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Roles</th>
+                    <th>Gender</th>
+                    <th data-orderable="false" style="width:80px">Action</th>
+                  </tr>
+                </thead>
+              <tbody>
+                <div class="modal fade" id="exampledelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                          <div  class="modal-header">
+                              <h5 class="modal-title"  style ="color:white;" id="exampleModalLabel">Confirm Deletion</h5>
+                              <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
+                                  <span  aria-hidden="true">&times;</span>
+                              </button>
+                          </div>
+                          <div class="modal-body">
+                              Are you sure to delete this item?
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                              <a id="deleteLink" href="#" class="btn btn-danger">Delete</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              </tbody>
+            </table>
+            <a  class="btn btn-dark mr-2" href="{% url 'add' %}">Add User</a>
+
+            <a class="btn btn-primary mr-2" href="#">Email</a>                                
+            <button id="{{User.id}}" 
+            data-toggle="modal" 
+            data-target="#exampledeleteusers" 
+            onclick="confirmDeleteuser('{{User.id}}')"
+            class="btn btn-danger confirm-delete">
+           <a href="#">
+           
+           </a>Delete Selected Users
+           </button>
+          
+           <div class="modal fade" id="exampledeleteusers" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div  class="modal-header">
+                        <h5 class="modal-title"  style ="color:white;" id="exampleModalLabel">Confirm Deletion</h5>
+                        <button type="button"  class="close" data-dismiss="modal" aria-label="Close">
+                            <span  aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure to delete this item?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <a id="deleteLink" href="{% url 'delete_selected_users' %}" class="btn btn-danger">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+{% endblock content%}
+<!-- Import libraries -->
+  {% block js %}
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<!--model-->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+/*----------------------------------ajax-datatable----------------------------------------------------*/ 
+<script>
+
+    $(document).ready(function() {
+      console.log('text1')
+      $('#user-table').DataTable({
+          "processing": true,
+          "serverSide": true,
+          "paging": true,
+          "searching": true,
+          "autoWidth": false,
+          "ordering": true,
+          'responsive': true,
+          "searching": true,
+    
+          
+          "ajax": "{% url 'search_userlist' %}",
+  
+          "columns": [
+              {  
+               "data": "id", 
+                render: function (data, type, full, meta)
+                            {
+                              return '<input type="checkbox" name="id[]" value="' + 
+                              $('<div/>').text(data).html() + '">';
+                            }
+                 },
+                 {
+                  'data': 'id',
+                  render: function (data, type, row, meta) {
+                  return meta.row + 1;}
+                  },
+              {
+                "data": "image",   
+                render: function (data, type, full, meta) {
+                      if (data) {
+                          return '<img src="/media/' + data + '" style="height:100px;width:100px;" alt="Image" />';
+                      } else {
+                          return '<img src="data:image/jpeg;base64,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" style="height:100px;width:100px;" alt="Default Image" />';
+                      }
+                  }
+              },
+              {"data": "username"},
+              {"data": "first_name"},
+              {"data": "last_name"},
+              {"data": "email"},
+              {"data": "role"},
+              {"data": "gender"},    
+              {
+                "data": "id",
+                render: function (data, type, full, meta) {
+                        
+                        return '<div role="admin"> <a id="edit_btn" class="action-btn edit edit-icon"><span class="ti-pencil"></span></a>' +
+                            ' <a class="action-btn delete delete-icon confirm-delete"><span class="ti-trash"></span></a></div>';
+                    }
+                }
+                
+              
+            ]
+      });
+
+/*--------------------------------------------------------------------*/  
+
+/*-------------------edit button when clicked ---------------------*/
+var table;
+$(document).ready( function () {
+ table  = $('#user-table').DataTable();
+} );
+//ON CLICK EDIT BUTTON 
+$('#user-table').on('click', '.edit', function() {
+    var row = $(this).closest('tr');
+    
+    console.log(row)
+    var rowData = table.row(row).data();
+    console.log(rowData)
+    var rowId = rowData['id'];
+    console.log(rowId)
+    var url = '/home/users_list/edit/user/' + rowId + '/';
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        success: function(response) {
+            // Redirect to edit_person.html page with the fetched data
+            window.location.href = '/home/users_list/edit/user/' + rowId + '/';
+        },
+        error: function(xhr, status, error) {
+            console.error('AJAX Error:', error);
+        }
+    });
+});
+/*----------------------------------------------------------------------------*/
+
+/*--------------------------delete button when clicked --------------------------*/
+$(document).ready(function() { 
+  // ON CLICK DELETE BUTTON
+  $('#user-table').on('click', '.delete', function() {
+    var row = $(this).closest('tr');
+    var rowData = table.row(row).data();
+    var rowId = rowData['id'];
+     // Define confirmDelete function
+    function confirmDelete(rowId) {
+          console.log('Row ID:', rowId);
+          // Set the href attribute of the "Delete" link in the modal to the actual delete URL
+          document.getElementById('deleteLink').href = '/home/users_list/delete/' + rowId + '/'; 
+          // Show the modal
+           $('#exampledelete').modal('show');
+      }
+      confirmDelete(rowId);
+    });
+
+  $('#exampledelete .btn-secondary').on('click', function() {
+      // Close the modal
+      $('#exampledelete').modal('hide');
+       });
+   //cancle btn delete confirm box 
+
+  $( ".close" ).on( "click", function() {
+      $( ".btn-secondary" ).trigger( "click" );
+      $('#exampledelete').modal('hide');
+    });
+
+   /* $('#deleteLink').on('click', function(e) {
+      e.preventDefault(); // Prevent the default action of the link
+      var url = $(this).attr('href');
+      // Execute AJAX request to delete the item
+      $.ajax({
+        url: url,
+        type: 'GET',
+        success: function(response) {
+          // If deletion is successful, you may want to update the DataTable or handle it accordingly
+          console.log('Item deleted successfully');
+          // For example, you can reload the DataTable
+          table.ajax.reload();
+        },
+        error: function(xhr, status, error) {
+          console.error('AJAX Error:', error);
+        }
+      });
+      // Close the modal after AJAX request is sent
+      $('#exampledelete').modal('hide');
+    }); */
+  });
+
+/*--------------------------------------------------------------------*/  
+/* user delete confirm box for one user */
+function confirmDelete(userId) {
+  // Set the href attribute of the "Delete" link in the modal to the actual delete URL
+  document.getElementById('deleteLink').href = '{% url "delete_selected_users"  %}'
+  // Show the modal
+  $('#exampledeleteusers').modal('show');
+ }
+
+
+
+/*-----------------user delete confirm box for one user----------- */
+/*$(document).ready(function() { 
+  // ON CLICK DELETE BUTTON
+  $('#user-table').on('click', '#Deleteusers', function() {
+    var row = $(this).closest('tr');
+    var rowData = table.row(row).data();
+    var rowId = rowData['id'];
+   function confirmDeleteuser(userId) {
+    // Set the href attribute of the "Delete" link in the modal to the actual delete URL
+    document.getElementById('Deleteusers').href = '{% url "delete_selected_users"  %}'
+    // Show the modal
+    $('#exampledelete').modal('show');
+  }
+   });
+
+    $('#exampledelete .btn-secondary').on('click', function() {
+    // Close the modal
+    $('#exampledelete').modal('hide');
+     });
+
+     $('#Deleteusers').on('click', function(e) {
+      e.preventDefault(); // Prevent the default action of the link
+      var url = $(this).attr('href');
+      // Execute AJAX request to delete the item
+      $.ajax({
+        url: url,
+        type: 'GET',
+        success: function(response) {
+          // If deletion is successful, you may want to update the DataTable or handle it accordingly
+          console.log('Item deleted successfully');
+          // For example, you can reload the DataTable
+          table.ajax.reload();
+        },
+        error: function(xhr, status, error) {
+          console.error('AJAX Error:', error);
+        }
+      });
+      // Close the modal after AJAX request is sent
+      $('#exampledelete').modal('hide');
+    });   
+  });*/
+
+});
+/*--------------------------------------------------------------------*/   
+</script>
+{% endblock %}
