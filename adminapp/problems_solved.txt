@@ -1,0 +1,25 @@
+=======adding two queries=====
+
+#list out all the user inside the User model
+        register_users = Register.objects.all().order_by('-id')
+
+        ====adding two queries===
+
+        role_users = Role.objects.all()
+        gender_users = Gender.objects.all()
+        #  Combine the two QuerySets
+        users = list(chain(register_users, role_users,gender_users)) 
+
+        
+
+        #users =  list(chain(Register, Role))
+
+
+        # Assuming you have a User model with foreign keys to Register, Role, and Gender
+        users = Register.objects.select_related('role', 'gender').all()
+
+
+=====problem of user of  particular role id====
+group = Group.objects.get(name="Manager")
+        users  = group.user_set.all()
+        users = Register.objects.select_related('users').all()
