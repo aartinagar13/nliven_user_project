@@ -1,0 +1,619 @@
+.navbar .navbar-brand-wrapper .navbar-brand img {
+    height: 15px;
+}
+
+.btn-primary,
+.wizard>.actions a {
+    color: #fff;
+    background-color: #066eb7;
+    border-color: #066eb7;
+}
+
+.btn-primary:hover,
+.wizard>.actions a:hover {
+    color: #fff;
+    background-color: #0665a7;
+    border-color: #0665a7;
+}
+
+.btn-primary:focus,
+.wizard>.actions a:focus,
+.btn-primary.focus,
+.wizard>.actions a.focus {
+    color: #fff;
+    background-color: #0665a7;
+    border-color: #0665a7;
+    box-shadow: 0 0 0 0.2rem rgb(102 100 184 / 50%);
+}
+
+.btn {
+    border-radius: 0;
+}
+
+.form-check .form-check-label input[type="checkbox"]:checked+.input-helper:before {
+    background: #066eb7;
+    border: solid #066eb7;
+    border-width: 0;
+}
+
+.auth .brand-logo img {
+    width: 250px;
+}
+
+.bg_image {
+    background-color:#e7e7e7;
+    height: 100vh;
+    width: 100vw;
+}
+
+.dailogbg_image {
+    background-image: url("../images/auth-dailog.png") !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100%;
+    width: 100%;
+}
+
+.sidebar .nav .nav-item.active>.nav-link {
+    background: #066eb7;
+    position: relative;
+}
+
+.sidebar .nav .nav-item.active>.nav-link {
+    background: #0665a7;
+    position: relative;
+}
+
+.sidebar .nav:not(.sub-menu)>.nav-item:hover>.nav-link,
+.sidebar .nav:not(.sub-menu)>.nav-item:hover[aria-expanded="true"] {
+    background: #0665a7;
+    color: #fff;
+}
+
+.sidebar-icon-only .sidebar .nav .nav-item.hover-open .nav-link .menu-title {
+    background: #0665a7;
+}
+
+.sidebar-icon-only .sidebar .nav .nav-item.hover-open .nav-link:hover .menu-title {
+    background: #0665a7;
+}
+
+.card-banner {
+    background-image: url("../images/dashboard-banner.png") !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100%;
+    width: 100%;
+}
+
+.border-top {
+    border-top: 3px solid #0665a7 !important;
+}
+
+.border-bottom {
+    border-bottom: 3px solid #0665a7 !important;
+}
+
+.border-left {
+    border-left: 3px solid #0665a7 !important;
+}
+
+.card {
+    border-radius: 0;
+}
+
+.announcement-bg {
+    background-image: url("../images/announcement.png") !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100%;
+    width: 100%;
+    color: #fff;
+    padding: 5rem 0;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.agreement-bg {
+    background-image: url("../images/agreement.png") !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100%;
+    width: 100%;
+    color: #fff;
+    padding: 5rem 0;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.zoom {
+    transition: transform 1s;
+}
+
+.zoom:hover {
+    transform: scale(1.2);
+    text-decoration: none;
+}
+
+.overflow_hidden {
+    overflow: hidden;
+}
+
+.bg_primary {
+    background-color: #d4edff;
+}
+
+.bg_warning {
+    background-color: #fffeda;
+}
+
+.text-primary {
+    color: #0665a7 !important;
+}
+
+.select2-container .select2-selection--single {
+    height: auto !important;
+    width: 100% !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 15px !important;
+    right: 15px !important;
+}
+
+.video_wrapper {
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+    background-color: #000;
+}
+
+.video_wrapper_full {
+    padding-top: 278px;
+}
+
+
+.videoIframe {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+}
+.success {
+    color: green;
+}
+.text-success {
+    color: green !important;
+}
+.videoPoster {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background-image: url(../images/agreement.png);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    border: none text-indent: -999em;
+    overflow: hidden;
+    opacity: 1;
+    -webkit-transition: opacity 800ms, height 0s;
+    -moz-transition: opacity 800ms, height 0s;
+    transition: opacity 800ms, height 0s;
+    -webkit-transition-delay: 0s, 0s;
+    -moz-transition-delay: 0s, 0s;
+    transition-delay: 0s, 0s;
+}
+
+.videoPoster:hover {
+    cursor: pointer;
+}
+
+.videoPoster:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    margin: -40px 0 0 -40px;
+    border: 5px solid #0665a7;
+    border-radius: 100%;
+    -webkit-transition: border-color 300ms;
+    -moz-transition: border-color 300ms;
+    transition: border-color 300ms;
+}
+
+.videoPoster:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    margin: -20px 0 0 -10px;
+    border-left: 32px solid #0665a7;
+    border-top: 18px solid transparent;
+    border-bottom: 25px solid transparent;
+    -webkit-transition: border-color 300ms;
+    -moz-transition: border-color 300ms;
+    transition: border-color 300ms;
+}
+
+.videoPoster:hover:before,
+.videoPoster:focus:before {
+    border-color: #fff;
+}
+
+.videoPoster:hover:after,
+.videoPoster:focus:after {
+    border-left-color: #fff;
+}
+
+.videoWrapperActive .videoPoster {
+    opacity: 0;
+    height: 0;
+    -webkit-transition-delay: 0s, 800ms;
+    -moz-transition-delay: 0s, 800ms;
+    transition-delay: 0s, 800ms;
+}
+
+.video_description {
+    background-color: #0866a8;
+    color: #fff;
+    padding: 40px;
+    border-radius: 0 60px 0;
+    position: absolute;
+    right: -100px;
+    z-index: 1;
+    top: 20%;
+    left: 15px;
+}
+
+
+.course_dropdown .select2-container--default .select2-selection--single {
+    background-color: #545454;
+    border: 1px solid #aaa;
+}
+
+.course_dropdown .select2-dropdown {
+    background-color: #545454 !important;
+}
+
+.course_dropdown .select2-container--default .select2-selection--single .select2-selection__rendered {
+    color: #fff;
+}
+
+.page_title {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #0665a7;
+}
+
+.form-check .form-check-label input[type="radio"]:checked+.input-helper:before {
+    background: #0665a7 !important;
+}
+
+.form-check .form-check-label input[type="radio"]+.input-helper:before {
+    border: solid #0665a7 !important;
+}
+
+.modal .modal-dialog .modal-content .modal-header {
+    padding: 15px 15px;
+    background-color: #066eb7;
+}
+
+.modal-header .close {
+    margin: -15px -15px -25px auto;
+}
+
+.modal .modal-dialog .modal-content .modal-header .close span {
+    color: #fff;
+}
+
+.action-btn {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    padding: 12px 10px;
+    cursor: pointer;
+    text-align: center;
+    color: #fff;
+}
+
+.action-btn:hover {
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.edit-icon {
+    background-color: #066eb7;
+}
+
+.delete-icon {
+    background-color: #FF4747;
+}
+
+.pagination .page-item.active .page-link {
+    background: #0665a7;
+    border-color: #0665a7;
+}
+
+.pagination .page-item.active .page-link:hover {
+    background: #0665a7;
+    border-color: #0665a7;
+}
+
+.pagination .page-item.active .page-link,
+.jsgrid .jsgrid-pager .page-item.active .page-link,
+.jsgrid .jsgrid-pager .active.jsgrid-pager-nav-button .page-link,
+.jsgrid .jsgrid-pager .active.jsgrid-pager-page .page-link,
+.pagination .page-item.active .jsgrid .jsgrid-pager .jsgrid-pager-nav-button a,
+.jsgrid .jsgrid-pager .page-item.active .jsgrid-pager-nav-button a,
+.jsgrid .jsgrid-pager .jsgrid-pager-nav-button .page-item.active a,
+.jsgrid .jsgrid-pager .active.jsgrid-pager-nav-button a,
+.pagination .page-item.active .jsgrid .jsgrid-pager .jsgrid-pager-page a,
+.jsgrid .jsgrid-pager .page-item.active .jsgrid-pager-page a,
+.jsgrid .jsgrid-pager .jsgrid-pager-page .page-item.active a,
+.jsgrid .jsgrid-pager .active.jsgrid-pager-page a,
+.pagination .page-item:hover .page-link,
+.jsgrid .jsgrid-pager .page-item:hover .page-link,
+.jsgrid .jsgrid-pager .jsgrid-pager-nav-button:hover .page-link,
+.jsgrid .jsgrid-pager .jsgrid-pager-page:hover .page-link,
+.pagination .page-item:hover .jsgrid .jsgrid-pager .jsgrid-pager-nav-button a,
+.jsgrid .jsgrid-pager .page-item:hover .jsgrid-pager-nav-button a,
+.jsgrid .jsgrid-pager .jsgrid-pager-nav-button .page-item:hover a,
+.jsgrid .jsgrid-pager .jsgrid-pager-nav-button:hover a,
+.pagination .page-item:hover .jsgrid .jsgrid-pager .jsgrid-pager-page a,
+.jsgrid .jsgrid-pager .page-item:hover .jsgrid-pager-page a,
+.jsgrid .jsgrid-pager .jsgrid-pager-page .page-item:hover a,
+.jsgrid .jsgrid-pager .jsgrid-pager-page:hover a,
+.pagination .page-item:focus .page-link,
+.jsgrid .jsgrid-pager .page-item:focus .page-link,
+.jsgrid .jsgrid-pager .jsgrid-pager-nav-button:focus .page-link,
+.jsgrid .jsgrid-pager .jsgrid-pager-page:focus .page-link,
+.pagination .page-item:focus .jsgrid .jsgrid-pager .jsgrid-pager-nav-button a,
+.jsgrid .jsgrid-pager .page-item:focus .jsgrid-pager-nav-button a,
+.jsgrid .jsgrid-pager .jsgrid-pager-nav-button .page-item:focus a,
+.jsgrid .jsgrid-pager .jsgrid-pager-nav-button:focus a,
+.pagination .page-item:focus .jsgrid .jsgrid-pager .jsgrid-pager-page a,
+.jsgrid .jsgrid-pager .page-item:focus .jsgrid-pager-page a,
+.jsgrid .jsgrid-pager .jsgrid-pager-page .page-item:focus a,
+.jsgrid .jsgrid-pager .jsgrid-pager-page:focus a,
+.pagination .page-item:active .page-link,
+.jsgrid .jsgrid-pager .page-item:active .page-link,
+.jsgrid .jsgrid-pager .jsgrid-pager-nav-button:active .page-link,
+.jsgrid .jsgrid-pager .jsgrid-pager-page:active .page-link,
+.pagination .page-item:active .jsgrid .jsgrid-pager .jsgrid-pager-nav-button a,
+.jsgrid .jsgrid-pager .page-item:active .jsgrid-pager-nav-button a,
+.jsgrid .jsgrid-pager .jsgrid-pager-nav-button .page-item:active a,
+.jsgrid .jsgrid-pager .jsgrid-pager-nav-button:active a,
+.pagination .page-item:active .jsgrid .jsgrid-pager .jsgrid-pager-page a,
+.jsgrid .jsgrid-pager .page-item:active .jsgrid-pager-page a,
+.jsgrid .jsgrid-pager .jsgrid-pager-page .page-item:active a,
+.jsgrid .jsgrid-pager .jsgrid-pager-page:active a {
+    background: #0665a7;
+    border-color: #0665a7;
+}
+
+.form-check .form-check-label input[type="checkbox"]+.input-helper:before {
+    border: 1px solid #066eb7;
+}
+
+.course_video {
+    padding-top: 267px;
+}
+
+.write_notes {
+    min-height: 267px;
+}
+
+.forum_username {
+    color: #0665a7;
+    font-weight: bold;
+}
+
+.reply_link {
+    border-left: 1px solid #ddd;
+    padding-left: 10px;
+    margin-left: 10px;
+    line-height: 15px;
+}
+
+.forum_innerdiv {
+    background-color: #f1f1f1;
+    padding: 15px;
+}
+
+.border_b {
+    border-bottom: 1px solid #ddd;
+}
+
+.btn {
+    padding: 0.675rem 1rem;
+}
+
+.download_links {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.download_links li {
+    background: #edf8ff;
+    border: 1px dotted #bad4e5;
+    padding: 10px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.download_icon {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.video_label {
+    font-size: 13px !important;
+    font-weight: 700;
+    color: #0665a7;
+}
+
+.js-video-button {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+
+/*----------------New style---------------*/
+
+.home_video {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 30px;
+}
+
+.vlength_info {
+    font-size: 12px;
+    color: #646c72;
+}
+
+.home_video a {
+    color: #1F1F1F;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.video_title {
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.part_title {
+    font-weight: bold;
+}
+
+.video_lg {
+    width: 100%;
+    height: 450px;
+}
+
+.dlink {
+    list-style-type: none;
+}
+
+.dpdf_icon {
+    width: 50px;
+}
+
+.chapter_description {
+    width: 100%;
+}
+
+.sidebar .nav.sub-menu {
+    background: #08609f;
+    padding-left: 25px;
+}
+
+.sidebar .nav:not(.sub-menu)>.nav-item>.nav-link[aria-expanded="true"] {
+    background: #0665a7;
+}
+
+.break_word {
+    white-space: pre-wrap !important;
+    line-height: 20px !important;
+    word-break: break-word;
+}
+
+
+
+
+
+
+@media(max-width:640px) {
+
+    .responsive_table {
+        width: 100%;
+        overflow-x: scroll;
+    }
+
+    .course_video {
+        padding-top: 158px;
+    }
+
+    .write_notes {
+        min-height: 158px;
+    }
+
+    .video_description {
+        position: static;
+        margin-bottom: 15px;
+    }
+
+    .video_wrapper_full {
+        padding-top: 180px;
+    }
+
+    .action-btn {
+        margin: 0 5px;
+    }
+
+    .download_links {
+        flex-wrap: wrap;
+    }
+
+    .download_links li {
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    .video_lg {
+        width: 100%;
+        height: 200px;
+    }
+
+    .chapter_description {
+        width: 100%;
+    }
+
+}
+
+
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+
+    .course_video {
+        padding-top: 172px;
+    }
+
+    .write_notes {
+        min-height: 172px;
+    }
+
+    .video_description {
+        padding: 20px;
+    }
+
+    .video_description h3 {
+        font-size: 18px;
+    }
+
+    .video_description p {
+        font-size: 14px;
+    }
+
+    .video_wrapper_full {
+        padding-top: 184px;
+    }
+
+}
